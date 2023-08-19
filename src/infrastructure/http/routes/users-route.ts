@@ -1,20 +1,48 @@
 import express from 'express'
+
 import findAllUsersUseCase from '../../../usecases/FindAllUsers'
 import findPokemonsByUserIdUseCase from '../../../usecases/FindPokemonsByUserId'
 import pushPokemonInUserUseCase from '../../../usecases/PushPokemonInUser'
 import removePokemonInUser from '../../../usecases/RemovePokemonInUser'
+import registerNewUserUseCase from '../../../usecases/RegisterNewUser'
+import findUserByUsernameUseCase from '../../../usecases/FindUserByUsername'
+
+import { NewUser } from '../../../types'
 
 const router = express.Router()
 
 router.get('/', (_, res) => {
   findAllUsersUseCase().then(
     data => {
-      console.log(data)
       res.json(data)
     },
     err => {
       console.error(err)
     }
+  )
+})
+
+router.get('/:username', (req, res) => {
+  findUserByUsernameUseCase(req.params.username).then(
+    (data) => {
+      if (data !== null) {
+        res.json(data)
+      } else {
+        res.status(404).json({
+          message: `User with username ${req.params.username} was not found`
+        })
+      }
+    },
+    (err) => console.error(err)
+  )
+})
+
+router.post('/', (req, res) => {
+  registerNewUserUseCase(req.body as NewUser).then(
+    (data) => {
+      res.json(data)
+    },
+    (err) => console.log(err)
   )
 })
 
