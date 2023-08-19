@@ -20,7 +20,7 @@ información sobre los Pokémon.
 un usuario agregar un Pokémon a su lista de favoritos.
 5. [X] Crear una ruta GET `/users/favorites/{userId}` que 
 devuelva la lista de Pokémon favoritos de un usuario.
-6. [-] Realizar una app front básica con cualquier 
+6. [] Realizar una app front básica con cualquier 
 tecnología, framework u HTML/CSS/JS, que permita hacer 
 uso de los endpoints realizados y visualizarlos de forma 
 simple y básica.
