@@ -1,8 +1,8 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import UserRouter from './infrastructure/http/routes/users-route'
-import LoginRouter from './infrastructure/http/routes/login-route'
-import PokemonRouter from './infrastructure/http/routes/pokemon-route'
+import UserRouter from './infrastructure/http/routes/UserRouter'
+import LoginRouter from './infrastructure/http/routes/LoginRouter'
+import PokemonRouter from './infrastructure/http/routes/PokemonRouter'
 
 dotenv.config()
 
