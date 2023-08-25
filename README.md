@@ -1,5 +1,7 @@
 # Reto [Express & TypeScript]
 
+![image](./screenshot.png)
+
 El objetivo de esta prueba es evaluar tus habilidades y 
 experiencia en el desarrollo backend utilizando Node.js 
 y las tecnologías asociadas. Deberás implementar una API 
@@ -26,3 +28,51 @@ uso de los endpoints realizados y visualizarlos de forma
 simple y básica.
 7. [X] Deseable realizar los demas metodos de un Rest-Api 
 restantes con `/users/favorites`
+
+## Qué necesitas?
+
+Necesitas tener instalado [docker](https://www.docker.com/).
+
+## Como lo ejecutas?
+
+Fácil, solamente tienes que ejecutar el siguiente comando y 
+está funcionando.
+
+```
+docker compose up -d
+```
+
+---
+
+## Modo desarrollador
+
+Para trabajar en este proyecto debes tener instalado NodeJS
+y una base de datos de MongoDB.
+
+Luego ejecutar los siguientes comandos para poder instalar
+dependencias.
+
+```
+npm install
+```
+
+Si no tienes instalado MongoDB en tu computadora, puedes usar
+el siguiente comando de docker para usar un Mongo de 
+manera rápida.
+
+```
+docker run -dp 27017:27017 --name mongodb mongo:latest
+```
+
+Luego para ejecutar el proyecto y detectar cambios debes 
+ejecutar el siguiente comando:
+
+```
+npm run dev
+```
+
+Si quieres solamente compilar el proyecto debes ejecutar:
+
+```
+npm run build
+```
