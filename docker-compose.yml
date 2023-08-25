@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+  mongodb1:
+    image: mongo
+    restart: always
+    environment:
+      - MONGO_INITDB_DATABASE=test
+    volumes:
+      - ./scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - dbdata0211:/data/db
+    networks:
+      - ech-network
+
+  express-challenge:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb1
+    environment:
+      - MONGO_URI=mongodb://mongodb1:27017/test
+    networks:
+      - ech-network
+
+volumes:
+  dbdata0211:
+
+
+networks:
+  ech-network:
+    driver: bridge
