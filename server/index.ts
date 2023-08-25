@@ -1,5 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import path from 'path'
+
 import UserRouter from './infrastructure/http/routes/UserRouter'
 import LoginRouter from './infrastructure/http/routes/LoginRouter'
 import PokemonRouter from './infrastructure/http/routes/PokemonRouter'
@@ -8,11 +10,12 @@ dotenv.config()
 
 const app = express()
 app.use(express.json())
+app.use(express.static(path.join(__dirname, 'www')))
 
 const PORT = process.env.PORT ?? 8080
 
 app.get('/', (_, res) => {
-  res.send('Express + TypeScript')
+  res.sendFile(path.join(__dirname, 'www/index.html'))
 })
 
 app.use('/users', UserRouter)
