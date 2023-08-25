@@ -96,7 +96,7 @@ const updateUser = async (user: User): Promise<boolean> => {
   const oId = new ObjectId(user.id)
   const result = await mongoClient.db(DATABASE_NAME)
     .collection(USERS_COLLECTION)
-    .updateOne({ _id: oId }, user)
+    .updateOne({ _id: oId }, { $set: user })
 
   await mongoClient.close()
 
