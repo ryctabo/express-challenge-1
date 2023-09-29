@@ -1,11 +1,11 @@
 import express from 'express'
-import findAllPokemonsUseCase from '../../../usecases/FindAllPokemons'
-import findPokemonByNameUseCase from '../../../usecases/FindPokemonByName'
+import FindAllPokemon from '@usecases/pokemons/find-all-usecase'
+import FindPokemonByName from '@usecases/pokemons/find-by-name-usecase'
 
 const router = express.Router()
 
 router.get('/', (_, res) => {
-  findAllPokemonsUseCase().then(
+  FindAllPokemon().then(
     (data) => {
       res.json(data)
     },
@@ -14,7 +14,7 @@ router.get('/', (_, res) => {
 })
 
 router.get('/:name', (req, res) => {
-  findPokemonByNameUseCase(req.params.name).then(
+  FindPokemonByName(req.params.name).then(
     (data) => {
       if (data !== null) {
         res.json(data)

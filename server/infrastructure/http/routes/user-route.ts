@@ -1,18 +1,16 @@
 import express from 'express'
 
-import findAllUsersUseCase from '../../../usecases/FindAllUsers'
-import findPokemonsByUserIdUseCase from '../../../usecases/FindPokemonsByUserId'
-import pushPokemonInUserUseCase from '../../../usecases/PushPokemonInUser'
-import removePokemonInUser from '../../../usecases/RemovePokemonInUser'
-import registerNewUserUseCase from '../../../usecases/RegisterNewUser'
-import findUserByUsernameUseCase from '../../../usecases/FindUserByUsername'
-
-import { NewUser } from '../../../types'
+import FindAllUser from '@usecases/users/find-all-usecase'
+import FindFavoritesPokemonByUser from '@usecases/users/find-favorites-usecase'
+import AddFavoritePokemon from '@usecases/users/add-favorite-pokemon-usecase'
+import RemoveFavoritePokemon from '@usecases/users/remove-favorite-pokemon-usecase'
+import RegisterUser from '@usecases/users/register-usecase'
+import FindUserByUsername from '@usecases/users/find-by-username-usecase'
 
 const router = express.Router()
 
 router.get('/', (_, res) => {
-  findAllUsersUseCase().then(
+  FindAllUser().then(
     data => {
       res.json(data)
     },
@@ -23,7 +21,7 @@ router.get('/', (_, res) => {
 })
 
 router.get('/:username', (req, res) => {
-  findUserByUsernameUseCase(req.params.username).then(
+  FindUserByUsername(req.params.username).then(
     (data) => {
       if (data !== null) {
         res.json(data)
@@ -38,7 +36,7 @@ router.get('/:username', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  registerNewUserUseCase(req.body as NewUser).then(
+  RegisterUser(req.body).then(
     (data) => {
       res.json(data)
     },
@@ -47,7 +45,7 @@ router.post('/', (req, res) => {
 })
 
 router.get('/favorites/:userId', (req, res) => {
-  findPokemonsByUserIdUseCase(req.params.userId).then(
+  FindFavoritesPokemonByUser(req.params.userId).then(
     (data) => {
       if (data !== null) {
         res.json(data)
@@ -63,7 +61,7 @@ router.get('/favorites/:userId', (req, res) => {
 
 router.post('/favorites', (req, res) => {
   const { userId, pokemon }: { userId: string, pokemon: string } = req.body
-  pushPokemonInUserUseCase(userId, pokemon).then(
+  AddFavoritePokemon(userId, pokemon).then(
     (data) => {
       if (data !== null) {
         res.json(data)
@@ -79,7 +77,7 @@ router.post('/favorites', (req, res) => {
 
 router.delete('/favorites', (req, res) => {
   const { userId, pokemon }: { userId: string, pokemon: string } = req.body
-  removePokemonInUser(userId, pokemon).then(
+  RemoveFavoritePokemon(userId, pokemon).then(
     (data) => {
       if (data !== null) {
         res.json(data)

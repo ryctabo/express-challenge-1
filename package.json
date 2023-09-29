@@ -41,6 +41,10 @@
     },
     "extends": [
       "./node_modules/ts-standard/eslintrc.json"
-    ]
+    ],
+    "rules": {
+      "@typescript-eslint/space-before-function-paren": "off",
+      "@typescript-eslint/restrict-template-expressions": "off"
+    }
   }
 }

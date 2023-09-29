@@ -1,11 +1,11 @@
 import express from 'express'
-import loginUseCase from '../../../usecases/Login'
-import { AuthRequest } from '../../../types'
+import { AuthRequest } from '@domain/auth/types'
+import Login from '@usecases/auth/login-usecase'
 
 const router = express.Router()
 
 router.post('/', (req, res) => {
-  loginUseCase(req.body as AuthRequest).then(
+  Login(req.body as AuthRequest).then(
     (data) => {
       if (data !== null) {
         res.json(data)
